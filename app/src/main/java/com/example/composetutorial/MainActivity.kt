@@ -37,6 +37,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.basicscodelab.BasicsCodelab
+import com.example.basicscodelab.Greetings
+import com.example.basicscodelab.ui.theme.BasicsCodelabTheme
 import com.example.composetutorial.data.Message
 import com.example.composetutorial.data.SampleData
 import com.example.composetutorial.ui.theme.ComposeTutorialTheme
@@ -45,11 +48,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposeTutorialTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    Conversation(messages = SampleData.conversationSample)
-                }
+            BasicsCodelabTheme {
+                BasicsCodelab(modifier = Modifier.fillMaxSize())
             }
+//            ComposeTutorialTheme {
+//                Surface(modifier = Modifier.fillMaxSize()) {
+//                    Conversation(messages = SampleData.conversationSample)
+//                }
+//            }
         }
     }
 }
@@ -196,16 +202,18 @@ fun Conversation(messages: List<Message>) {
     }
 }
 
-//@Preview(name = "Light Mode")
-//@Preview(
-//    uiMode = Configuration.UI_MODE_NIGHT_YES,
-//    showBackground = true,
-//    name = "Dark Mode"
-//)
-@Preview
+//@Preview
+//@Composable
+//fun PreviewMessageCard() {
+//    ComposeTutorialTheme {
+//        Conversation(messages = SampleData.conversationSample)
+//    }
+//}
+
+@Preview(showBackground = true, widthDp = 320)
 @Composable
-fun PreviewMessageCard() {
-    ComposeTutorialTheme {
-        Conversation(messages = SampleData.conversationSample)
+fun PreviweBasicsColdelab() {
+    BasicsCodelabTheme {
+        Greetings()
     }
 }
