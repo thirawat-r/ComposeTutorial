@@ -7,12 +7,14 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -99,14 +101,55 @@ fun AlignYourBodyElement(
     }
 }
 
-@Preview(showBackground = true)
+@Composable
+fun FavouriteCollectionCard(
+    modifier: Modifier,
+    @DrawableRes painterRes: Int,
+    @StringRes text: Int
+) {
+    Surface(
+        shape = MaterialTheme.shapes.small,
+        modifier = modifier
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.width(192.dp)
+        ) {
+            Image(
+                painter = painterResource(id = painterRes),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(56.dp)
+            )
+            Text(
+                text = stringResource(id = text),
+                style = MaterialTheme.typography.labelLarge,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Composable
+fun FavouriteCollectionCardPreview() {
+    ComposeTutorialTheme {
+        FavouriteCollectionCard(
+            painterRes = R.drawable.fc2_nature_meditations,
+            text = R.string.fc2_nature_meditations,
+            modifier = Modifier.padding(all = 8.dp)
+        )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
 fun AlignBodyElementPreview() {
     ComposeTutorialTheme {
         AlignYourBodyElement(
-            modifier = Modifier.padding(all = 8.dp),
             painterRes = R.drawable.ab1_inversions,
-            text = R.string.ab1_inversions
+            text = R.string.ab1_inversions,
+            modifier = Modifier.padding(all = 8.dp)
         )
     }
 }
