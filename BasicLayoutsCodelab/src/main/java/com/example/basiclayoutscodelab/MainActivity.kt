@@ -6,7 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +17,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -32,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.basiclayoutscodelab.data.AlignBodyData
 import com.example.basiclayoutscodelab.ui.theme.ComposeTutorialTheme
 
 class MainActivity : ComponentActivity() {
@@ -74,14 +79,34 @@ fun SearchBar(
 }
 
 @Composable
+fun AlignYourBodyRow(
+    modifier: Modifier,
+    alignBodyDataList: List<AlignBodyData>
+) {
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        modifier = modifier
+    ) {
+        items(alignBodyDataList) { item ->
+            AlignYourBodyElement(
+                modifier = Modifier,
+                painterRes = item.imageRes,
+                text = item.stringRes
+            )
+        }
+    }
+}
+
+@Composable
 fun AlignYourBodyElement(
     modifier: Modifier,
     @DrawableRes painterRes: Int,
     @StringRes text: Int
 ) {
     Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
     ) {
         Image(
             painter = painterResource(id = painterRes),
@@ -93,7 +118,7 @@ fun AlignYourBodyElement(
         )
         Text(
             text = stringResource(id = text),
-            style = MaterialTheme.typography.labelLarge,
+            style = MaterialTheme.typography.titleSmall,
             modifier = Modifier.paddingFromBaseline(
                 top = 24.dp, bottom = 8.dp
             )
@@ -123,7 +148,7 @@ fun FavouriteCollectionCard(
             )
             Text(
                 text = stringResource(id = text),
-                style = MaterialTheme.typography.labelLarge,
+                style = MaterialTheme.typography.titleSmall,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
         }
@@ -150,6 +175,38 @@ fun AlignBodyElementPreview() {
             painterRes = R.drawable.ab1_inversions,
             text = R.string.ab1_inversions,
             modifier = Modifier.padding(all = 8.dp)
+        )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Composable
+fun AlignBodyRowPreview() {
+    ComposeTutorialTheme {
+        AlignYourBodyRow(
+            modifier = Modifier,
+            alignBodyDataList = listOf(
+                AlignBodyData(
+                    imageRes = R.drawable.ab1_inversions,
+                    stringRes = R.string.ab1_inversions
+                ),
+                AlignBodyData(
+                    imageRes = R.drawable.ab2_quick_yoga,
+                    stringRes = R.string.ab2_quick_yoga
+                ),
+                AlignBodyData(
+                    imageRes = R.drawable.ab3_stretching,
+                    stringRes = R.string.ab3_stretching
+                ),
+                AlignBodyData(
+                    imageRes = R.drawable.ab4_tabata,
+                    stringRes = R.string.ab4_tabata
+                ),
+                AlignBodyData(
+                    imageRes = R.drawable.ab5_hiit,
+                    stringRes = R.string.ab5_hiit
+                )
+            )
         )
     }
 }
