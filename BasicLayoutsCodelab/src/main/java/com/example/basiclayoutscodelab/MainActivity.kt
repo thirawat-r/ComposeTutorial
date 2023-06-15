@@ -36,6 +36,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -55,6 +56,7 @@ import com.example.basiclayoutscodelab.data.favouriteCollectionDataList
 import com.example.basiclayoutscodelab.ui.theme.MySootheTheme
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.Locale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +68,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SearchBar()
+                    MySootheApp()
                 }
             }
         }
@@ -74,7 +76,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
+fun MySootheApp() {
+    MySootheTheme {
+        Scaffold(bottomBar = { SootheBottomNavigation() }
+        ) { padding ->
+            HomeScreen(modifier = Modifier.padding(padding))
+        }
+    }
+}
+
+@Composable
+fun SootheBottomNavigation(modifier: Modifier = Modifier) {
     BottomNavigation(
         backgroundColor = MaterialTheme.colorScheme.background,
         modifier = modifier
@@ -165,7 +177,7 @@ fun HomeSection(
 ) {
     Column(modifier = modifier) {
         Text(
-            text = stringResource(id = title),
+            text = stringResource(id = title).uppercase(Locale.getDefault()),
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier
                 .paddingFromBaseline(top = 40.dp, bottom = 8.dp)
@@ -401,5 +413,13 @@ fun HomeSectionPreview() {
 fun SearchBarPreview() {
     MySootheTheme {
         SearchBar()
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Composable
+fun MySoothePreview() {
+    MySootheTheme {
+        MySootheApp()
     }
 }

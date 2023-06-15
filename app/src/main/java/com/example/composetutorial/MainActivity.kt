@@ -37,6 +37,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.basiclayoutscodelab.MySootheApp
+import com.example.basiclayoutscodelab.ui.theme.MySootheTheme
 import com.example.basicscodelab.BasicsCodelab
 import com.example.basicscodelab.Greetings
 import com.example.basicscodelab.ui.theme.BasicsCodelabTheme
@@ -48,14 +50,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            BasicsCodelabTheme {
-                BasicsCodelab(modifier = Modifier.fillMaxSize())
+            MySootheTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    MySootheApp()
+                }
             }
-//            ComposeTutorialTheme {
-//                Surface(modifier = Modifier.fillMaxSize()) {
-//                    Conversation(messages = SampleData.conversationSample)
-//                }
-//            }
         }
     }
 }
