@@ -7,7 +7,7 @@ data class AlignBodyData(
     var stringRes: Int
 )
 
-val AlignBodyDataList = listOf(
+val alignBodyDataList = listOf(
     AlignBodyData(
         imageRes = R.drawable.ab1_inversions,
         stringRes = R.string.ab1_inversions

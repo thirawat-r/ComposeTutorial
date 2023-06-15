@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,7 +24,9 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
@@ -41,8 +44,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.basiclayoutscodelab.data.AlignBodyData
-import com.example.basiclayoutscodelab.data.AlignBodyDataList
 import com.example.basiclayoutscodelab.data.FavouriteCollectionData
+import com.example.basiclayoutscodelab.data.alignBodyDataList
+import com.example.basiclayoutscodelab.data.favouriteCollectionDataList
 import com.example.basiclayoutscodelab.ui.theme.MySootheTheme
 
 class MainActivity : ComponentActivity() {
@@ -85,6 +89,33 @@ fun SearchBar(
 }
 
 @Composable
+fun HomeScreen(
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(vertical = 16.dp)
+    ) {
+        Spacer(modifier = Modifier.height(16.dp))
+        SearchBar(modifier = Modifier.padding(horizontal = 16.dp))
+        HomeSection(
+            title = R.string.align_your_body,
+            content = {
+                AlignYourBodyRow(alignBodyDataList = alignBodyDataList)
+            }
+        )
+        HomeSection(
+            title = R.string.favorite_collections,
+            content = {
+                FavouriteCollectionsGrid(favouriteCollectionDataList = favouriteCollectionDataList)
+            }
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+    }
+}
+
+@Composable
 fun HomeSection(
     @StringRes title: Int,
     modifier: Modifier = Modifier,
@@ -104,7 +135,7 @@ fun HomeSection(
 
 @Composable
 fun FavouriteCollectionsGrid(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     favouriteCollectionDataList: List<FavouriteCollectionData>
 ) {
     LazyHorizontalGrid(
@@ -200,6 +231,14 @@ fun FavouriteCollectionCard(
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
         }
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2, heightDp = 180)
+@Composable
+fun ScreenContentPreview() {
+    MySootheTheme {
+        HomeScreen()
     }
 }
 
@@ -299,7 +338,7 @@ fun HomeSectionPreview() {
             title = R.string.align_your_body,
             content = {
                 AlignYourBodyRow(
-                    alignBodyDataList = AlignBodyDataList
+                    alignBodyDataList = alignBodyDataList
                 )
             }
         )
