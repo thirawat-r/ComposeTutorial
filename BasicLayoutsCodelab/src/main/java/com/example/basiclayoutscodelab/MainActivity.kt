@@ -41,14 +41,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.basiclayoutscodelab.data.AlignBodyData
+import com.example.basiclayoutscodelab.data.AlignBodyDataList
 import com.example.basiclayoutscodelab.data.FavouriteCollectionData
-import com.example.basiclayoutscodelab.ui.theme.ComposeTutorialTheme
+import com.example.basiclayoutscodelab.ui.theme.MySootheTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposeTutorialTheme {
+            MySootheTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -84,7 +85,25 @@ fun SearchBar(
 }
 
 @Composable
-fun FavouriteCollectionsGrind(
+fun HomeSection(
+    @StringRes title: Int,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Column(modifier = modifier) {
+        Text(
+            text = stringResource(id = title),
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier
+                .paddingFromBaseline(top = 40.dp, bottom = 8.dp)
+                .padding(horizontal = 16.dp)
+        )
+        content()
+    }
+}
+
+@Composable
+fun FavouriteCollectionsGrid(
     modifier: Modifier,
     favouriteCollectionDataList: List<FavouriteCollectionData>
 ) {
@@ -109,7 +128,7 @@ fun FavouriteCollectionsGrind(
 
 @Composable
 fun AlignYourBodyRow(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     alignBodyDataList: List<AlignBodyData>
 ) {
     LazyRow(
@@ -187,7 +206,7 @@ fun FavouriteCollectionCard(
 @Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
 fun FavouriteCollectionCardPreview() {
-    ComposeTutorialTheme {
+    MySootheTheme {
         FavouriteCollectionCard(
             painterRes = R.drawable.fc1_short_mantras,
             text = R.string.fc2_nature_meditations,
@@ -199,7 +218,7 @@ fun FavouriteCollectionCardPreview() {
 @Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
 fun AlignBodyElementPreview() {
-    ComposeTutorialTheme {
+    MySootheTheme {
         AlignYourBodyElement(
             painterRes = R.drawable.ab1_inversions,
             text = R.string.ab1_inversions,
@@ -211,7 +230,7 @@ fun AlignBodyElementPreview() {
 @Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
 fun AlignBodyRowPreview() {
-    ComposeTutorialTheme {
+    MySootheTheme {
         AlignYourBodyRow(
             modifier = Modifier,
             alignBodyDataList = listOf(
@@ -242,9 +261,9 @@ fun AlignBodyRowPreview() {
 
 @Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
 @Composable
-fun FavouriteCollectionsGrindPreview() {
-    ComposeTutorialTheme {
-        FavouriteCollectionsGrind(
+fun FavouriteCollectionsGridPreview() {
+    MySootheTheme {
+        FavouriteCollectionsGrid(
             modifier = Modifier,
             favouriteCollectionDataList = listOf(
                 FavouriteCollectionData(
@@ -272,11 +291,26 @@ fun FavouriteCollectionsGrindPreview() {
     }
 }
 
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Composable
+fun HomeSectionPreview() {
+    MySootheTheme {
+        HomeSection(
+            title = R.string.align_your_body,
+            content = {
+                AlignYourBodyRow(
+                    alignBodyDataList = AlignBodyDataList
+                )
+            }
+        )
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
 fun SearchBarPreview() {
-    ComposeTutorialTheme {
+    MySootheTheme {
         SearchBar()
     }
 }

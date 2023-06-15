@@ -66,6 +66,11 @@ val Typography = Typography(
         fontSize = 28.sp,
         letterSpacing = (1.15).sp
     ),
+    titleLarge = TextStyle(
+        fontFamily = fontFamilyKulim,
+        fontSize = 18.sp,
+        letterSpacing = (1.15).sp
+    ),
     titleMedium = TextStyle(
         fontFamily = fontFamilyKulim,
         fontSize = 16.sp,
@@ -76,11 +81,11 @@ val Typography = Typography(
         fontSize = 14.sp,
         letterSpacing = 0.sp
     ),
-    titleSmall = TextStyle(
+    labelMedium = TextStyle(
         fontSize = 14.sp,
         letterSpacing = 0.sp
     ),
-    titleLarge = TextStyle(
+    labelSmall = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize = 14.sp,
         letterSpacing = (1.15).sp
