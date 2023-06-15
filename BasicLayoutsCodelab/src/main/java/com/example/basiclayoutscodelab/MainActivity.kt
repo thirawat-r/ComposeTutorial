@@ -27,8 +27,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -48,6 +53,8 @@ import com.example.basiclayoutscodelab.data.FavouriteCollectionData
 import com.example.basiclayoutscodelab.data.alignBodyDataList
 import com.example.basiclayoutscodelab.data.favouriteCollectionDataList
 import com.example.basiclayoutscodelab.ui.theme.MySootheTheme
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +70,41 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
+    BottomNavigation(
+        backgroundColor = MaterialTheme.colorScheme.background,
+        modifier = modifier
+    ) {
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = null
+                )
+            },
+            label = {
+                Text(stringResource(R.string.bottom_navigation_home))
+            },
+            selected = true,
+            onClick = {}
+        )
+        BottomNavigationItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = null
+                )
+            },
+            label = {
+                Text(stringResource(R.string.bottom_navigation_profile))
+            },
+            selected = false,
+            onClick = {}
+        )
     }
 }
 
@@ -231,6 +273,14 @@ fun FavouriteCollectionCard(
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
         }
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Composable
+fun SoothBottomNavigationPreview() {
+    MySootheTheme {
+        SootheBottomNavigation()
     }
 }
 
