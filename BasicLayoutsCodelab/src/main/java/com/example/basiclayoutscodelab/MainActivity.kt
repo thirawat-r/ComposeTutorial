@@ -12,12 +12,16 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -37,6 +41,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.basiclayoutscodelab.data.AlignBodyData
+import com.example.basiclayoutscodelab.data.FavouriteCollectionData
 import com.example.basiclayoutscodelab.ui.theme.ComposeTutorialTheme
 
 class MainActivity : ComponentActivity() {
@@ -76,6 +81,30 @@ fun SearchBar(
             Text(text = stringResource(id = R.string.placeholder_search))
         }
     )
+}
+
+@Composable
+fun FavouriteCollectionsGrind(
+    modifier: Modifier,
+    favouriteCollectionDataList: List<FavouriteCollectionData>
+) {
+    LazyHorizontalGrid(
+        rows = GridCells.Fixed(2),
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = modifier
+            .height(120.dp)
+    ) {
+        items(favouriteCollectionDataList) { item ->
+            FavouriteCollectionCard(
+                painterRes = item.imageRes,
+                text = item.stringRes,
+                modifier = Modifier
+                    .height(56.dp),
+            )
+        }
+    }
 }
 
 @Composable
@@ -160,7 +189,7 @@ fun FavouriteCollectionCard(
 fun FavouriteCollectionCardPreview() {
     ComposeTutorialTheme {
         FavouriteCollectionCard(
-            painterRes = R.drawable.fc2_nature_meditations,
+            painterRes = R.drawable.fc1_short_mantras,
             text = R.string.fc2_nature_meditations,
             modifier = Modifier.padding(all = 8.dp)
         )
@@ -205,6 +234,38 @@ fun AlignBodyRowPreview() {
                 AlignBodyData(
                     imageRes = R.drawable.ab5_hiit,
                     stringRes = R.string.ab5_hiit
+                )
+            )
+        )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Composable
+fun FavouriteCollectionsGrindPreview() {
+    ComposeTutorialTheme {
+        FavouriteCollectionsGrind(
+            modifier = Modifier,
+            favouriteCollectionDataList = listOf(
+                FavouriteCollectionData(
+                    imageRes = R.drawable.fc1_short_mantras,
+                    stringRes = R.string.fc1_short_mantras
+                ),
+                FavouriteCollectionData(
+                    imageRes = R.drawable.fc2_nature_meditations,
+                    stringRes = R.string.fc2_nature_meditations
+                ),
+                FavouriteCollectionData(
+                    imageRes = R.drawable.fc3_stress_and_anxiety,
+                    stringRes = R.string.fc3_stress_and_anxiety
+                ),
+                FavouriteCollectionData(
+                    imageRes = R.drawable.fc4_self_massage,
+                    stringRes = R.string.fc4_self_massage
+                ),
+                FavouriteCollectionData(
+                    imageRes = R.drawable.fc5_overwhelmed,
+                    stringRes = R.string.fc5_overwhelmed
                 )
             )
         )
