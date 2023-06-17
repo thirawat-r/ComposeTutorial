@@ -42,6 +42,7 @@ import com.example.basiclayoutscodelab.ui.theme.MySootheTheme
 import com.example.basicscodelab.BasicsCodelab
 import com.example.basicscodelab.Greetings
 import com.example.basicscodelab.ui.theme.BasicsCodelabTheme
+import com.example.basicstatecodelab.WellnessScreen
 import com.example.composetutorial.data.Message
 import com.example.composetutorial.data.SampleData
 import com.example.composetutorial.ui.theme.ComposeTutorialTheme
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MySootheApp()
+                    WellnessScreen()
                 }
             }
         }

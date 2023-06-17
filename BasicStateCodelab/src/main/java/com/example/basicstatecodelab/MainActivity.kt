@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
+                    WellnessScreen()
                 }
             }
         }
@@ -35,6 +35,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeTutorialTheme {
-        WaterCounter()
+        WellnessScreen()
     }
 }
