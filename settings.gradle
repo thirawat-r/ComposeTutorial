@@ -16,3 +16,4 @@ rootProject.name = "ComposeTutorial"
 include ':app'
 include ':BasicLayoutsCodelab'
 include ':BasicsCodelab'
+include ':BasicStateCodelab'
