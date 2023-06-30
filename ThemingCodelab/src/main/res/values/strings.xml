@@ -1,4 +1,5 @@
 <resources>
     <string name="title_activity_main">MainActivity</string>
     <string name="search_replies">"Search Replies</string>
+    <string name="profile">Profile</string>
 </resources>
